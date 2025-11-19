@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
 const UserProfile = () => {
   const initialUser = {
-    name: "Stefany Vivanco",
+    name: "Lider del Equipo",
     role: "Administradora",
     bio: "Apasionada por crear experiencias digitales intuitivas.",
     skills: [

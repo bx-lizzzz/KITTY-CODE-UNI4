@@ -12,6 +12,8 @@ import {
   SiFigma,
 } from "react-icons/si";
 import { FaCode, FaLightbulb, FaUsers } from "react-icons/fa";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
 
 const Skills = () => {
   const [skills, setSkills] = useState([]);
@@ -20,11 +22,11 @@ const Skills = () => {
     const fetchSkills = async () => {
       const skillsCollection = collection(db, "Habilidades");
       const snapshot = await getDocs(skillsCollection);
-      const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
-      // Agrupar por categoría para que coincida con la UI
+      // Agrupar por categoría para UI
       const grouped = data.reduce((acc, skill) => {
-        const catIndex = acc.findIndex(c => c.categoria === skill.categoria);
+        const catIndex = acc.findIndex((c) => c.categoria === skill.categoria);
         if (catIndex !== -1) {
           acc[catIndex].habilidades.push(skill);
         } else {
@@ -41,10 +43,10 @@ const Skills = () => {
   return (
     <div className="py-16 bg-pink-50">
       {/* Encabezado */}
-      <section className="bg-pink-500 text-white py-20 text-center">
+      <section className="bg-pink-300 text-white py-20 text-center">
         <h1 className="text-4xl font-bold mb-6">Habilidades de Kitty Code 💻</h1>
         <p className="text-xl max-w-2xl mx-auto">
-          Aquí mostramos las competencias de nuestro equipo en desarrollo y diseño, 
+          Aquí mostramos las competencias de nuestro equipo en desarrollo y diseño,
           combinando creatividad y tecnología para entregar los mejores proyectos 💕.
         </p>
       </section>
@@ -52,9 +54,13 @@ const Skills = () => {
       {/* Cartillas */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6 mt-12">
         {skills.map((categoria, idx) => (
-          <div
+          <motion.div
             key={idx}
-            className="bg-white rounded-2xl shadow-md hover:shadow-lg transition-all p-6 border border-pink-100 transform hover:-translate-y-2 hover:scale-105"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="bg-white rounded-2xl shadow-md hover:shadow-lg transition-all p-6 border border-pink-100 transform hover:-translate-y-1 hover:scale-105"
           >
             <h2 className="text-2xl font-semibold text-pink-600 mb-4 text-center bg-pink-100 rounded-xl py-2 px-4 inline-block">
               {categoria.categoria}
@@ -68,15 +74,17 @@ const Skills = () => {
                 </div>
 
                 <div className="w-full bg-pink-100 rounded-full h-3 mb-2 overflow-hidden">
-                  <div
-                    className="bg-pink-400 h-3 rounded-full transition-all duration-1000 ease-in-out"
-                    style={{ width: `${hab.nivel}%` }}
-                  ></div>
+                  <motion.div
+                    className="bg-pink-400 h-3 rounded-full"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${hab.nivel}%` }}
+                    transition={{ duration: 1.2, ease: "easeInOut" }}
+                  ></motion.div>
                 </div>
                 <p className="text-sm text-gray-600">{hab.descripcion}</p>
               </div>
             ))}
-          </div>
+          </motion.div>
         ))}
       </div>
 

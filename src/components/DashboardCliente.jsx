@@ -3,16 +3,46 @@ import React, { useState } from "react";
 import { logout } from "../services/auth";
 import UserProfile from "./UserProfile";
 
+// 💬 TARJETA DE TESTIMONIO
+const TestimonialCard = ({ testimonial, onDelete }) => (
+  <div className="bg-pink-50 border border-pink-100 rounded-2xl shadow-sm p-6 relative">
+    <p className="text-gray-700 italic mb-4">“{testimonial.content}”</p>
+    <div className="text-right">
+      <h4 className="font-semibold text-pink-600">{testimonial.name}</h4>
+      <p className="text-sm text-gray-600">{testimonial.role}</p>
+      <p className="text-xs text-gray-500">{testimonial.company}</p>
+      <div className="text-yellow-400 mt-1">
+        {"⭐".repeat(testimonial.rating)}
+      </div>
+    </div>
+    <button
+      onClick={() => onDelete(testimonial.id)}
+      className="absolute top-3 right-3 text-rose-600 font-bold px-2 py-1 hover:bg-rose-100 rounded"
+    >
+      Eliminar
+    </button>
+  </div>
+);
+
 // CRUD de testimonios
 const TestimoniosManager = () => {
   const [testimonios, setTestimonios] = useState([]);
-  const [input, setInput] = useState("");
+  const [form, setForm] = useState({ name: "", content: "", rating: 5 });
 
   const handleAdd = () => {
-    if (!input) return;
-    const newTestimonio = { id: Date.now(), text: input };
+    if (!form.name || !form.content) return;
+
+    const newTestimonio = {
+      id: Date.now(),
+      name: form.name,
+      content: form.content,
+      rating: form.rating,
+      role: "Cliente",
+      company: "Kitty Code",
+    };
+
     setTestimonios([newTestimonio, ...testimonios]);
-    setInput("");
+    setForm({ name: "", content: "", rating: 5 });
   };
 
   const handleDelete = (id) => {
@@ -21,40 +51,58 @@ const TestimoniosManager = () => {
 
   return (
     <div>
-      <h2 className="text-lg font-semibold text-pink-700 mb-4">Notitas</h2>
+      <h2 className="text-lg font-semibold text-pink-700 mb-4">Testimonios</h2>
 
-      <div className="flex gap-2 mb-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-2 mb-6">
+        {/* Input Nombre */}
         <input
           type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Escribe un testimonio"
-          className="flex-1 border border-pink-300 rounded-lg px-3 py-2 text-sm"
+          value={form.name}
+          onChange={(e) => setForm({ ...form, name: e.target.value })}
+          placeholder="Nombre"
+          className="border border-pink-300 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-pink-400 focus:outline-none transition"
         />
+
+        {/* Input Contenido */}
+        <input
+          type="text"
+          value={form.content}
+          onChange={(e) => setForm({ ...form, content: e.target.value })}
+          placeholder="Escribe un testimonio"
+          className="border border-pink-300 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-pink-400 focus:outline-none transition col-span-2"
+        />
+
+        {/* Select Rating */}
+        <select
+          value={form.rating}
+          onChange={(e) => setForm({ ...form, rating: Number(e.target.value) })}
+          className="border border-pink-300 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-pink-400 focus:outline-none transition"
+        >
+          {[1, 2, 3, 4, 5].map((n) => (
+            <option key={n} value={n}>
+              {"⭐".repeat(n)}
+            </option>
+          ))}
+        </select>
+
+        {/* Botón Agregar */}
         <button
           onClick={handleAdd}
-          className="bg-pink-500 text-white px-4 py-2 rounded-xl"
+          className="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-4 py-2 rounded-xl shadow hover:opacity-90 transition md:col-span-4"
         >
           Agregar
         </button>
       </div>
 
-      <ul className="space-y-2">
-        {testimonios.map((t) => (
-          <li
-            key={t.id}
-            className="flex justify-between items-center bg-pink-50 px-4 py-2 rounded-lg border border-pink-200"
-          >
-            <span>{t.text}</span>
-            <button
-              onClick={() => handleDelete(t.id)}
-              className="text-rose-600 font-bold px-2 py-1 hover:bg-rose-100 rounded"
-            >
-              Eliminar
-            </button>
-          </li>
-        ))}
-      </ul>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {testimonios.length === 0 ? (
+          <p className="text-gray-500 text-sm">Aún no hay testimonios.</p>
+        ) : (
+          testimonios.map((t) => (
+            <TestimonialCard key={t.id} testimonial={t} onDelete={handleDelete} />
+          ))
+        )}
+      </div>
     </div>
   );
 };
@@ -160,3 +208,5 @@ const DashboardCliente = () => {
 };
 
 export default DashboardCliente;
+
+

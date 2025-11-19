@@ -55,7 +55,7 @@ const MemberDashboard = () => {
       ¡Bienvenida a ser Miembro Kitty!
     </h1>
     <p className="text-pink-600 text-lg max-w-xl">
-      En esta página encontrarás <strong>habilidades, material y proyectos</strong> que te ayudarán a crecer y explorar tu creatividad. 
+      En esta página encontrarás <strong>habilidades y proyectos</strong> que te ayudarán a crecer y explorar tu creatividad. 
       Confiamos en ti y en tu capacidad de hacer cosas increíbles ✨.
     </p>
     <p className="text-pink-500 italic">¡Explora, aprende y diviértete!</p>
@@ -137,9 +137,8 @@ const MemberDashboard = () => {
 
             <ul className="text-xs text-pink-500 space-y-1">
               <li>🐾 Gestionar perfil personal</li>
-               <li>🐾 Control total de todo el sistema</li>
-              {isTeam && <li>🐾 Editar contenido del sitio</li>}
-              {isAdmin && <li>🐾 Control total de todo el sistema</li>}
+               <li>🐾 Agregar o editar proyectos del equipo</li>
+              {isTeam && <li>🐾 Editar contenido de habilidades</li>}
             </ul>
           </div>
         </aside>
