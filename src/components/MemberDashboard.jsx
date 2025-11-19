@@ -1,24 +1,13 @@
 // src/components/MemberDashboard.jsx
 import React, { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { logout } from "../services/auth";
 import ProjectsManager from "./ProjectsManager";
 import UserProfile from "./UserProfile";
 
-const MemberDashboard = () => {
-  const { user, userRole, isTeam } = useAuth();
+const MemberDashboard = ({ onLogout }) => {
+  const { user } = useAuth();
   const [activeTab, setActiveTab] = useState("profile");
   const [loading, setLoading] = useState(false);
-
-  const handleLogout = async () => {
-    setLoading(true);
-    try {
-      await logout();
-    } catch (error) {
-      console.error("Error logging out:", error);
-    }
-    setLoading(false);
-  };
 
   const tabs = [
     { id: "profile", name: "Mi Perfil", icon: "👤" },
@@ -28,11 +17,11 @@ const MemberDashboard = () => {
   const renderContent = () => {
     switch (activeTab) {
       case "profile":
-        return <UserProfile />;
+        return <UserProfile user={user} />;
       case "projects":
         return <ProjectsManager />;
       default:
-        return <UserProfile />;
+        return <UserProfile user={user} />;
     }
   };
 
@@ -58,27 +47,21 @@ const MemberDashboard = () => {
                 <span className="text-white text-lg font-bold">CR</span>
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">
-                  Dashboard Código Rosa
-                </h1>
-                <p className="text-sm text-gray-500">
-                  Gestión de Miembro del Equipo
-                </p>
+                <h1 className="text-xl font-bold text-gray-900">Dashboard Código Rosa</h1>
+                <p className="text-sm text-gray-500">Gestión de Miembro del Equipo</p>
               </div>
             </div>
 
             <div className="flex items-center space-x-4">
               <div className="text-right">
-                <p className="text-sm font-medium text-gray-900">
-                  {user?.displayName || user?.email}
-                </p>
-                <p className="text-xs text-gray-500">{getRoleLabel(userRole)}</p>
+                <p className="text-sm font-medium text-gray-900">{user?.displayName || user?.email}</p>
+                <p className="text-xs text-gray-500">{getRoleLabel(user?.role)}</p>
               </div>
 
               <button
-                onClick={handleLogout}
                 disabled={loading}
                 className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors disabled:opacity-50"
+                onClick={onLogout}
               >
                 {loading ? "Saliendo..." : "Cerrar Sesión"}
               </button>
@@ -93,9 +76,7 @@ const MemberDashboard = () => {
           {/* Sidebar Navigation */}
           <div className="lg:w-64">
             <nav className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">
-                Navegación
-              </h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">Navegación</h2>
               <ul className="space-y-2">
                 {tabs.map((tab) => (
                   <li key={tab.id}>
@@ -116,12 +97,10 @@ const MemberDashboard = () => {
 
               {/* Role Info */}
               <div className="mt-8 p-4 bg-gradient-to-r from-pink-50 to-purple-50 rounded-lg border">
-                <h3 className="text-sm font-semibold text-gray-900 mb-2">
-                  Tu Rol
-                </h3>
-                <p className="text-xs text-gray-600 mb-2">{getRoleLabel(userRole)}</p>
+                <h3 className="text-sm font-semibold text-gray-900 mb-2">Tu Rol</h3>
+                <p className="text-xs text-gray-600 mb-2">{getRoleLabel(user?.role)}</p>
                 <div className="text-xs text-gray-500">
-                  {isTeam && <div>✅ Gestionar perfil personal y proyectos</div>}
+                  {user?.role === "team" && <div>✅ Gestionar perfil personal y proyectos</div>}
                 </div>
               </div>
             </nav>

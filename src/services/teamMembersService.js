@@ -1,3 +1,4 @@
+// src/services/teamMembersService.js
 import { db } from "../firebase";
 import { 
   collection, 
@@ -8,7 +9,6 @@ import {
   doc 
 } from "firebase/firestore";
 
-// Nombre de colección
 const COLLECTION = "teamMembers";
 
 // CREATE
@@ -20,9 +20,9 @@ export const createMember = async (data) => {
 // READ
 export const getMembers = async () => {
   const querySnapshot = await getDocs(collection(db, COLLECTION));
-  return querySnapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
+  return querySnapshot.docs.map((d) => ({
+    id: d.id,
+    ...d.data(),
   }));
 };
 

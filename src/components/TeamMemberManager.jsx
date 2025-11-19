@@ -1,3 +1,4 @@
+// src/dashboard/TeamMemberManager.jsx
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import {
@@ -8,7 +9,6 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
-// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
 const TeamMemberManager = () => {
@@ -27,6 +27,7 @@ const TeamMemberManager = () => {
     email: "",
   });
 
+  // LOAD TEAM MEMBERS
   const fetchTeam = async () => {
     try {
       const snapshot = await getDocs(collection(db, "teamMembers"));
@@ -41,6 +42,7 @@ const TeamMemberManager = () => {
     fetchTeam();
   }, []);
 
+  // SUBMIT FORM (ADD OR UPDATE)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -84,21 +86,22 @@ const TeamMemberManager = () => {
     }
   };
 
+  // DELETE
   const handleDelete = async (id) => {
-  const confirmDelete = window.confirm(
-    "Kitty Code 🐾: ¿Estás seguro de que quieres eliminar este miembro?"
-  );
-  if (!confirmDelete) return;
+    const confirmDelete = window.confirm(
+      "Kitty Code 🐾: ¿Estás seguro de que quieres eliminar este miembro?"
+    );
+    if (!confirmDelete) return;
 
-  try {
-    await deleteDoc(doc(db, "teamMembers", id));
-    fetchTeam();
-  } catch (error) {
-    console.error("Error deleting member:", error);
-  }
-};
+    try {
+      await deleteDoc(doc(db, "teamMembers", id));
+      fetchTeam();
+    } catch (error) {
+      console.error("Error deleting member:", error);
+    }
+  };
 
-
+  // EDIT
   const handleEdit = (m) => {
     setEditingId(m.id);
     setForm({
@@ -114,6 +117,7 @@ const TeamMemberManager = () => {
     });
   };
 
+  // CANCEL
   const handleCancel = () => {
     setEditingId(null);
     setForm({
@@ -179,7 +183,9 @@ const TeamMemberManager = () => {
           placeholder="Enfoque actual"
           className="p-3 rounded-lg border border-pink-300 md:col-span-2"
           value={form.currentFocus}
-          onChange={(e) => setForm({ ...form, currentFocus: e.target.value })}
+          onChange={(e) =>
+            setForm({ ...form, currentFocus: e.target.value })
+          }
         />
 
         <input
@@ -199,7 +205,9 @@ const TeamMemberManager = () => {
           placeholder="LinkedIn"
           className="p-3 rounded-lg border border-pink-300"
           value={form.linkedin}
-          onChange={(e) => setForm({ ...form, linkedin: e.target.value })}
+          onChange={(e) =>
+            setForm({ ...form, linkedin: e.target.value })
+          }
         />
 
         <input
@@ -207,7 +215,9 @@ const TeamMemberManager = () => {
           placeholder="GitHub"
           className="p-3 rounded-lg border border-pink-300"
           value={form.github}
-          onChange={(e) => setForm({ ...form, github: e.target.value })}
+          onChange={(e) =>
+            setForm({ ...form, github: e.target.value })
+          }
         />
 
         <input
@@ -218,7 +228,7 @@ const TeamMemberManager = () => {
           onChange={(e) => setForm({ ...form, email: e.target.value })}
         />
 
-        {/* Buttons */}
+        {/* BUTTONS */}
         <div className="mt-4 flex gap-3 md:col-span-2">
           <motion.button
             whileHover={{ scale: 1.05, y: -3 }}
@@ -247,13 +257,17 @@ const TeamMemberManager = () => {
             className="bg-white p-4 border border-pink-200 rounded-xl shadow-sm flex justify-between cursor-grab"
             drag
             dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
-            whileHover={{ scale: 1.03, boxShadow: "0 8px 20px rgba(0,0,0,0.15)" }}
+            whileHover={{
+              scale: 1.03,
+              boxShadow: "0 8px 20px rgba(0,0,0,0.15)",
+            }}
           >
             <div>
               <p className="font-bold text-pink-600">{m.name}</p>
               <p className="text-sm text-gray-600">{m.role}</p>
               <p className="text-gray-500 text-xs mt-1">{m.bio}</p>
             </div>
+
             <div className="flex space-x-2">
               <motion.button
                 whileHover={{ scale: 1.1 }}
@@ -262,6 +276,7 @@ const TeamMemberManager = () => {
               >
                 Editar
               </motion.button>
+
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 onClick={() => handleDelete(m.id)}
