@@ -1,4 +1,4 @@
-// src/pages/Skills.jsx
+
 import { useState, useEffect } from "react";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
@@ -24,7 +24,6 @@ const Skills = () => {
       const snapshot = await getDocs(skillsCollection);
       const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
-      // Agrupar por categoría para UI
       const grouped = data.reduce((acc, skill) => {
         const catIndex = acc.findIndex((c) => c.categoria === skill.categoria);
         if (catIndex !== -1) {

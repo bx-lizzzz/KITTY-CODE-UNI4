@@ -1,4 +1,4 @@
-// src/pages/Team.jsx
+
 import { useState, useEffect } from "react";
 import { db } from "../firebase";
 import { collection, onSnapshot } from "firebase/firestore";
@@ -12,33 +12,33 @@ const Team = () => {
     {
       id: "t1",
       name: "Ana Pérez",
-      role: "Mentora de Frontend",
+      role: "CEO – DreamTech Studio",
       company: "TechGirls",
-      content: "Trabajar con Kitty Code ha sido una experiencia inspiradora.",
+      content: "El equipo de Kitty Code superó mis expectativas. Son creativas, responsables y muy profesionales.",
       rating: 5,
     },
     {
       id: "t2",
       name: "María López",
-      role: "Diseñadora UX/UI",
+      role: "Directora de Marketing – FreshBrand",
       company: "CreativeHub",
-      content: "Su dedicación y creatividad son impresionantes.",
+      content: "Me encantó cómo transformaron mi idea en una página web moderna y funcional. ¡Súper recomendadas!",
       rating: 4,
     },
     {
       id: "t3",
       name: "Lucía Torres",
-      role: "Desarrolladora Backend",
+      role: "Fotógrafa – PixelArt Studio",
       company: "DevSolutions",
-      content: "El equipo demuestra un gran talento y compromiso.",
+      content: "Trabajar con Kitty Code fue una experiencia fluida y divertida. Su estilo único marcó la diferencia.",
       rating: 5,
     },
     {
       id: "t4",
       name: "Sofía Ramírez",
-      role: "Project Manager",
+      role: "Emprendedora – DulceCafé",
       company: "Innovatech",
-      content: "¡Siempre entregan resultados con calidad y pasión!",
+      content: "Fueron muy atentas y entendieron exactamente lo que necesitaba para mi negocio.",
       rating: 5,
     },
   ]);
@@ -102,7 +102,7 @@ const Team = () => {
       {/* TESTIMONIALS */}
       <section className="py-16 bg-white px-6">
         <h2 className="text-3xl font-bold text-pink-600 mb-10 text-center">
-          💕 Lo que dicen de nosotras
+Cada comentario es una patita más que nos impulsa a seguir creando 💖🐾
         </h2>
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
           {testimonials.map((t) => (

@@ -1,4 +1,4 @@
-// src/dashboard/TeamMemberManager.jsx
+
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import {
@@ -28,7 +28,6 @@ const TeamMemberManager = () => {
     email: "",
   });
 
-  // LOAD TEAM MEMBERS
   const fetchTeam = async () => {
     try {
       const snapshot = await getDocs(collection(db, "teamMembers"));
@@ -43,7 +42,6 @@ const TeamMemberManager = () => {
     fetchTeam();
   }, []);
 
-  // SUBMIT FORM (ADD OR UPDATE)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -87,7 +85,6 @@ const TeamMemberManager = () => {
     }
   };
 
-  // 🔴 MODIFICACIÓN: handleDelete con modal Kitty Code
   const handleDelete = async (id) => {
     const confirmed = await new Promise((resolve) => {
       const modal = document.createElement("div");

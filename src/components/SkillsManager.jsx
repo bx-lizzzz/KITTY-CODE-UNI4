@@ -1,4 +1,4 @@
-// src/components/SkillsManagerStyled.jsx
+
 import React, { useState, useEffect } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
@@ -71,7 +71,6 @@ const SkillsManagerStyled = () => {
     setShowForm(true);
   };
 
-  // 🔴 MODIFICACIÓN: handleDelete con modal Kitty Code
   const handleDelete = async (id) => {
     const confirmed = await new Promise((resolve) => {
       const modal = document.createElement("div");

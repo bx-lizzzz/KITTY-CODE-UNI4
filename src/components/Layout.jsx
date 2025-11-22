@@ -11,7 +11,6 @@ const Layout = ({ children }) => {
     { name: "Portafolio", href: "/portfolio" },
     { name: "Habilidades", href: "/habilidades" },
     { name: "Contacto", href: "/contacto" },
-    // 🌸 Agregado aquí:
     { name: "Dashboard", href: "/dashboard" },
   ];
 
@@ -41,11 +40,10 @@ const Layout = ({ children }) => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`px-3 py-2 text-sm font-medium transition-colors duration-200 ${
-                    isActive(item.href)
+                  className={`px-3 py-2 text-sm font-medium transition-colors duration-200 ${isActive(item.href)
                       ? "text-pink-500 border-b-2 border-pink-400"
                       : "text-gray-600 hover:text-pink-500"
-                  }`}
+                    }`}
                 >
                   {item.name}
                 </Link>
@@ -93,11 +91,10 @@ const Layout = ({ children }) => {
                     key={item.name}
                     to={item.href}
                     onClick={() => setIsMenuOpen(false)}
-                    className={`block px-3 py-2 text-sm font-medium transition-colors duration-200 ${
-                      isActive(item.href)
+                    className={`block px-3 py-2 text-sm font-medium transition-colors duration-200 ${isActive(item.href)
                         ? "text-pink-500 bg-pink-50 rounded-md"
                         : "text-gray-600 hover:text-pink-500 hover:bg-gray-50 rounded-md"
-                    }`}
+                      }`}
                   >
                     {item.name}
                   </Link>
@@ -126,10 +123,9 @@ const Layout = ({ children }) => {
                 </span>
               </div>
               <p className="text-pink-50 mb-3 text-sm leading-relaxed">
-                Somos Kitty Code, un grupo donde integramos el arte y la
-                computación creando diseños web únicos con estilo propio y
-                dinámico. Cada línea de código lleva un toque de creatividad y
-                corazón 💕.
+                En Kitty Code hacemos páginas web para empresas y emprendedoras que 
+                buscan algo bonito, moderno y profesional. Además, invitamos a chicas que aman la 
+                tecnología a unirse al equipo y crear proyectos reales con nosotras.💕.
               </p>
               <div className="flex space-x-4 text-lg">
                 <a href="#" className="hover:text-white/80 transition-colors">

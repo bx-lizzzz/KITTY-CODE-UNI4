@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
-// IMPORTS CORRECTOS SEGÚN auth.js
 import { 
   signInWithEmail, 
   signInWithGoogle 

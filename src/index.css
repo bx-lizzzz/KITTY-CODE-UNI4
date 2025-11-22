@@ -1,9 +1,5 @@
 @import "tailwindcss";
 
-/* =====================================================
-   🐾 CURSOR DE PATTITA + EFECTOS BRILLANTES MEJORADOS
-===================================================== */
-
 /* 🩷 Cursor principal */
 .custom-cursor {
   position: fixed;
@@ -22,12 +18,12 @@
 /* ✨ Huellitas más visibles y un poco más grandes */
 .paw-trail {
   position: fixed;
-  width: 28px; /* antes 22px */
+  width: 28px; 
   height: 28px;
   background-image: url("/cursor-pink.png");
   background-size: contain;
   background-repeat: no-repeat;
-  opacity: 0.45; /* un poco más visible */
+  opacity: 0.45; 
   transform: rotate(var(--angle));
   pointer-events: none;
   z-index: 9998;

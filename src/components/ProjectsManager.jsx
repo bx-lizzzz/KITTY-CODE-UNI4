@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
-// Datos iniciales de ejemplo
 const initialProjects = [
   {
     id: 1,
@@ -82,7 +81,6 @@ const ProjectsManager = () => {
     setShowForm(true);
   };
 
-  // 🔴 MODIFICACIÓN: handleDelete con modal Kitty Code
   const handleDelete = async (id) => {
     const confirmed = await new Promise((resolve) => {
       const modal = document.createElement("div");

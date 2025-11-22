@@ -7,7 +7,6 @@ import Portfolio from "./pages/Portfolio";
 import Skills from "./pages/Skills";
 import Contact from "./pages/Contact";
 
-// ⭐ Agregar DashboardPage
 import DashboardPage from "./pages/DashboardPage";
 import DashboardCliente from "./components/DashboardCliente";
 import MemberDashboard from "./components/MemberDashboard";
@@ -75,8 +74,6 @@ function App() {
           <Route path="/portafolio" element={<Portfolio />} />
           <Route path="/habilidades" element={<Skills />} />
           <Route path="/contacto" element={<Contact />} />
-
-          {/* ⭐ Aquí agregamos tu Dashboard */}
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/Dashboard" element={<Dashboard />} />
             <Route path="/MemberDashboard" element={<MemberDashboard />} />

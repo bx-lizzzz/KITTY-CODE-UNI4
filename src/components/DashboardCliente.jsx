@@ -1,4 +1,4 @@
-// src/components/DashboardCliente.jsx
+
 import React, { useState } from "react";
 import { logout } from "../services/auth";
 import UserProfile from "./UserProfile";

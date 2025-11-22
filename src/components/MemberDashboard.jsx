@@ -1,4 +1,4 @@
-// src/components/Dashboard.jsx
+
 import React, { useState } from "react";
 import { logout } from "../services/auth";
 import { useAuth } from "../contexts/AuthContext";
@@ -32,7 +32,7 @@ const MemberDashboard = () => {
     setLoading(true);
     try {
       await logout();
-      window.location.href = "/"; // redirección segura
+      window.location.href = "/"; 
     } catch (e) {
       console.error("Error al cerrar sesión:", e);
     }
